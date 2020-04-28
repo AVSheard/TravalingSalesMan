@@ -5,16 +5,15 @@ const totalItems = 5;
 
 function setup() {
 	createCanvas(400, 300);
-	for (var i = 0; i < totalItems; i++) {
-		var v = createVector(random(width), random(height));
-		items[i] = v;
+	for (let i = 0; i < totalItems; i++) {
+		items[i] = createVector(random(width), random(height));
 	}
 }
 
 function draw() {
 	background(0);
 	fill(255);
-	for (var i = 0; i < items.length; i++) {
+	for (let i = 0; i < items.length; i++) {
 		ellipse(items[i].x, items[i].y, 4, 4);
 	}
 
@@ -22,7 +21,7 @@ function draw() {
 	strokeWeight(2);
 	noFill();
 	beginShape();
-	for (var i = 0; i < items.length; i++) {
+	for (let i = 0; i < items.length; i++) {
 		vertex(items[i].x, items[i].y);
 	}
 	endShape();
@@ -36,4 +35,17 @@ function swap(arr, index1, index2) {
 	const temp = arr[index1];
 	arr[index1] = arr[index2];
 	arr[index2] = temp;
+}
+
+function calcDist(points) {
+	let totalDist = 0;
+	for (let i = 0; i < points.length; i++) {
+		totalDist += dist(
+			points[i].x,
+			points[i].y,
+			points[i + 1].x,
+			points[i + 1].y
+		);
+	}
+	return totalDist;
 }
