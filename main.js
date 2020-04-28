@@ -17,4 +17,13 @@ function draw() {
 	for (var i = 0; i < items.length; i++) {
 		ellipse(items[i].x, items[i].y, 4, 4);
 	}
+
+	stroke(255);
+	strokeWeight(2);
+	noFill();
+	beginShape();
+	for (var i = 0; i < items.length; i++) {
+		vertex(items[i].x, items[i].y);
+	}
+	endShape();
 }
