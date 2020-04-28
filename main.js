@@ -1,7 +1,7 @@
 /** @format */
 
 let items = [];
-const totalItems = 3;
+const totalItems = 5;
 
 function setup() {
 	createCanvas(400, 300);
@@ -26,6 +26,10 @@ function draw() {
 		vertex(items[i].x, items[i].y);
 	}
 	endShape();
+
+	const index1 = floor(random(items.length));
+	const index2 = floor(random(items.length));
+	swap(items, index1, index2);
 }
 
 function swap(arr, index1, index2) {
