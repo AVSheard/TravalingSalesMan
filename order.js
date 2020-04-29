@@ -9,15 +9,22 @@ function setup() {
 function draw() {
 	background(0);
 
-	let largeestX = -1;
+	let largestX = -1;
 	for (let i = 0; i < arr.length - 1; i++) {
 		if (arr[i] < arr[i + 1]) {
-			largeestX = i;
+			largestX = i;
 		}
 	}
-	if (largeestX === -1) {
+	if (largestX === -1) {
 		noLoop();
 		console.log("Finished");
+	}
+
+	let largestY = -1;
+	for (let i = 0; j < arr.length; i++) {
+		if (arr[i] < arr[largestY]) {
+			largestY = i;
+		}
 	}
 }
 
