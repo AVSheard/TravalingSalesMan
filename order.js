@@ -21,13 +21,17 @@ function draw() {
 	}
 
 	let largestY = -1;
-	for (let i = 0; j < arr.length; i++) {
-		if (arr[i] < arr[largestY]) {
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] > arr[largestX]) {
 			largestY = i;
 		}
 	}
 
 	swap(arr, largestX, largestY);
+	let endArr = arr.splice(largestX + 1);
+	endArr.reverse();
+	arr = arr.concat(endArr);
+	console.log(arr);
 }
 
 function swap(arr, index1, index2) {
