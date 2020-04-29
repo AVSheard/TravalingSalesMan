@@ -26,6 +26,8 @@ function draw() {
 			largestY = i;
 		}
 	}
+
+	swap(arr, largestX, largestY);
 }
 
 function swap(arr, index1, index2) {
