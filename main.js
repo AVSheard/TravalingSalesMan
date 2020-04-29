@@ -1,7 +1,7 @@
 /** @format */
 
 let items = [];
-const totalItems = 6;
+const totalItems = 4;
 let bestDist;
 let bestRout;
 let curentOrder = [];
@@ -29,27 +29,26 @@ function draw() {
 	noFill();
 	beginShape();
 	for (let i = 0; i < items.length; i++) {
-		vertex(items[i].x, items[i].y);
+		const currentItem = curentOrder[i];
+		vertex(items[currentItem].x, items[currentItem].y);
 	}
 	endShape();
 
-	stroke(255, 0, 255);
-	strokeWeight(4);
-	noFill();
-	beginShape();
-	for (let i = 0; i < items.length; i++) {
-		vertex(bestRout[i].x, bestRout[i].y);
-	}
-	endShape();
-
-	const index1 = floor(random(items.length));
-	const index2 = floor(random(items.length));
-	swap(items, index1, index2);
+	// stroke(255, 0, 255);
+	// strokeWeight(4);
+	// noFill();
+	// beginShape();
+	// for (let i = 0; i < items.length; i++) {
+	// 	console.log(bestRout[i]);
+	// 	let n = bestRout[i];
+	// 	vertex(n.x, n.y);
+	// }
+	// endShape();
 
 	const thisDist = calcDist(items);
 	if (thisDist < bestDist) {
 		bestDist = thisDist;
-		bestRout = [...items];
+		bestRout = [...curentOrder];
 		console.log(bestDist);
 	}
 
@@ -65,12 +64,9 @@ function swap(arr, index1, index2) {
 function calcDist(points) {
 	let totalDist = 0;
 	for (let i = 0; i < points.length - 1; i++) {
-		totalDist += dist(
-			points[i].x,
-			points[i].y,
-			points[i + 1].x,
-			points[i + 1].y
-		);
+		const p1 = points[curentOrder[i]];
+		const p2 = points[curentOrder[i + 1]];
+		totalDist += dist(p1.x, p1.y, p2.x, p2.y);
 	}
 	return totalDist;
 }
@@ -95,11 +91,11 @@ function order(arr) {
 	let endArr = arr.splice(largestX + 1);
 	endArr.reverse();
 	arr = arr.concat(endArr);
-	console.log(arr);
 
 	if (largestX === -1) {
 		noLoop();
 		console.log("Finished");
+		console.log(bestRout);
 	}
 	return arr;
 }
