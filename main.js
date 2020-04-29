@@ -1,13 +1,18 @@
 /** @format */
 
 let items = [];
-const totalItems = 5;
+const totalItems = 10;
+let bestDist;
+let bestRout;
 
 function setup() {
 	createCanvas(400, 300);
 	for (let i = 0; i < totalItems; i++) {
 		items[i] = createVector(random(width), random(height));
 	}
+
+	bestDist = calcDist(items);
+	bestRout = [...items];
 }
 
 function draw() {
@@ -18,7 +23,7 @@ function draw() {
 	}
 
 	stroke(255);
-	strokeWeight(2);
+	strokeWeight(1);
 	noFill();
 	beginShape();
 	for (let i = 0; i < items.length; i++) {
@@ -26,9 +31,25 @@ function draw() {
 	}
 	endShape();
 
+	stroke(255, 0, 255);
+	strokeWeight(4);
+	noFill();
+	beginShape();
+	for (let i = 0; i < items.length; i++) {
+		vertex(bestRout[i].x, bestRout[i].y);
+	}
+	endShape();
+
 	const index1 = floor(random(items.length));
 	const index2 = floor(random(items.length));
 	swap(items, index1, index2);
+
+	const thisDist = calcDist(items);
+	if (thisDist < bestDist) {
+		bestDist = thisDist;
+		bestRout = [...items];
+		console.log(bestDist);
+	}
 }
 
 function swap(arr, index1, index2) {
@@ -39,7 +60,7 @@ function swap(arr, index1, index2) {
 
 function calcDist(points) {
 	let totalDist = 0;
-	for (let i = 0; i < points.length; i++) {
+	for (let i = 0; i < points.length - 1; i++) {
 		totalDist += dist(
 			points[i].x,
 			points[i].y,
